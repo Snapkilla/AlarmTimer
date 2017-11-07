@@ -24,8 +24,9 @@ public class AlarmTimer {
         JLabel title = new JLabel("Маму ебал, рейд через");
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        timeLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        timeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
         timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        timeLabel.setVerticalAlignment(SwingConstants.NORTH);
 
         f.add(title);
         f.add(timeLabel);
