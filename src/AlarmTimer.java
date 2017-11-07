@@ -11,6 +11,7 @@ import javax.swing.Timer;
 import javax.swing.SwingConstants;
 import java.util.*;
 import java.text.*;
+import java.util.concurrent.TimeUnit;
 
 public class AlarmTimer {
 
@@ -23,6 +24,9 @@ public class AlarmTimer {
         JLabel title = new JLabel("Маму ебал, рейд через");
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setHorizontalAlignment(SwingConstants.CENTER);
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         f.add(title);
         f.add(timeLabel);
         f.getContentPane().setBackground(Color.white);
@@ -42,7 +46,7 @@ class AlarmLabel extends JLabel implements ActionListener {
             setForeground(Color.black);
             //Locale locale = new Locale("ru");
 
-            int currentDay = now.get(Calendar.DAY_OF_WEEK);
+            //int currentDay = now.get(Calendar.DAY_OF_WEEK);
 
             //tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7) );
 
@@ -82,25 +86,24 @@ class AlarmLabel extends JLabel implements ActionListener {
         }
 
     public void actionPerformed(ActionEvent ae) {
+        Date d = new Date();
+        long millisLeft = tuesday.getTimeInMillis() - d.getTime();
+        //Date date = new Date(millisLeft);
+        //DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
+        //formated.setTimeZone(TimeZone.getTimeZone("UTC"));
+        //String normaldate = formated.format(date);
+        long seconds =  (millisLeft / 1000) % 60 ;
+        long minutes =  ((millisLeft  / (1000*60)) % 60);
+        long hours   =  ((millisLeft  / (1000*60*60)) % 24);
+        long days   =  ((millisLeft / (1000*60*60*24)));
+        String normaldate = new String(String.valueOf(days) + " : " + String.valueOf(hours) + " : " + String.valueOf(minutes) + " : " + String.valueOf(seconds) );
 
-        long millisLeft = tuesday.getTimeInMillis() - now.getTimeInMillis();
-        Date date = new Date(millisLeft);
-        DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
-        formated.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String normaldate = formated.format(date);
+        setText(normaldate);
 
-                switch (type) {
-            case "time" : sdf = new SimpleDateFormat(normaldate);
-                setFont(new Font("times-new-roman", Font.PLAIN, 60));
-                setHorizontalAlignment(SwingConstants.CENTER);
-                break;
-            default     : sdf = new SimpleDateFormat();
-                break;
-        }
-
-        setText(sdf.format(normaldate));
-
-        System.out.println("ХУЙ");
+        System.out.println(normaldate);
+        System.out.println(millisLeft);
+        System.out.println(now.getTimeInMillis());
+        System.out.println(d.getTime());
     }
 
 }
