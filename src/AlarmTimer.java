@@ -38,27 +38,24 @@ class AlarmLabel extends JLabel implements ActionListener {
             this.type = type;
             setForeground(Color.black);
 
-            Calendar c = Calendar.getInstance();
-           // c.set(Calendar.DAY_OF_WEEK_IN_MONTH, 2);
-         //   c.set(Calendar.HOUR_OF_DAY, 12);
-         //   c.set(Calendar.MINUTE, 0);
-         //   c.set(Calendar.SECOND, 0);
-         //   c.set(Calendar.MILLISECOND, 0);
-          //  long day = 7 - (c.get(Calendar.DAY_OF_WEEK)-2)-1;
-         //   long howMany = (c.getTimeInMillis()-System.currentTimeMillis());
-          //  Date date = new Date(howMany);
-          //  DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
-           // String normaldate = formated.format(date);
-            long days = 7 - Calendar.DAY_OF_WEEK;
-            long hours = 24 - Calendar.HOUR_OF_DAY;
-            long minutes = 60 - Calendar.MINUTE;
-            long seconds = 60 - Calendar.SECOND;
-            System.out.println(days);
-            System.out.println(hours);
-            System.out.println(minutes);
-            System.out.println(seconds);
+            Calendar now = Calendar.getInstance();
+            int currentDay = now.get(Calendar.DAY_OF_WEEK);
+
+            Calendar tuesday = Calendar.getInstance();
+            tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7 ));
+            // int tuesdayDay = 7 - (currentDay%7);
+
+            tuesday.set(Calendar.HOUR_OF_DAY, 12);
+            tuesday.set(Calendar.MINUTE, 00);
+
+            long millisLeft = tuesday.getTimeInMillis() - now.getTimeInMillis();
+
+              Date date = new Date(millisLeft);
+              DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
+             String normaldate = formated.format(date);
+
             switch (type) {
-                case "time" : sdf = new SimpleDateFormat(days, hours, minutes, seconds);
+                case "time" : sdf = new SimpleDateFormat(normaldate);
                     setFont(new Font("times-new-roman", Font.PLAIN, 60));
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
