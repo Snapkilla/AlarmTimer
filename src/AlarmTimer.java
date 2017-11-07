@@ -38,18 +38,27 @@ class AlarmLabel extends JLabel implements ActionListener {
             this.type = type;
             setForeground(Color.black);
 
-            GregorianCalendar c = new GregorianCalendar(2017, Calendar.NOVEMBER, 14);
+            Calendar c = Calendar.getInstance();
            // c.set(Calendar.DAY_OF_WEEK_IN_MONTH, 2);
          //   c.set(Calendar.HOUR_OF_DAY, 12);
          //   c.set(Calendar.MINUTE, 0);
          //   c.set(Calendar.SECOND, 0);
          //   c.set(Calendar.MILLISECOND, 0);
-            long howMany = (c.getTimeInMillis()-System.currentTimeMillis());
-            Date date = new Date(howMany);
-            DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
-            String normaldate = formated.format(date);
+          //  long day = 7 - (c.get(Calendar.DAY_OF_WEEK)-2)-1;
+         //   long howMany = (c.getTimeInMillis()-System.currentTimeMillis());
+          //  Date date = new Date(howMany);
+          //  DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
+           // String normaldate = formated.format(date);
+            long days = 7 - Calendar.DAY_OF_WEEK;
+            long hours = 24 - Calendar.HOUR_OF_DAY;
+            long minutes = 60 - Calendar.MINUTE;
+            long seconds = 60 - Calendar.SECOND;
+            System.out.println(days);
+            System.out.println(hours);
+            System.out.println(minutes);
+            System.out.println(seconds);
             switch (type) {
-                case "time" : sdf = new SimpleDateFormat(normaldate);
+                case "time" : sdf = new SimpleDateFormat(days, hours, minutes, seconds);
                     setFont(new Font("times-new-roman", Font.PLAIN, 60));
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
