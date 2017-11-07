@@ -20,7 +20,7 @@ public class AlarmTimer {
         f.setSize(500, 350);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(new GridLayout(2, 1));
-        JLabel title = new JLabel("Маму ебал");
+        JLabel title = new JLabel("Маму ебал, рейд через");
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         f.add(title);
