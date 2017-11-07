@@ -47,6 +47,8 @@ class AlarmLabel extends JLabel implements ActionListener {
 
             tuesday.set(Calendar.HOUR_OF_DAY, 12);
             tuesday.set(Calendar.MINUTE, 00);
+            tuesday.set(Calendar.SECOND, 00);
+            tuesday.set(Calendar.MILLISECOND, 00);
 
             long millisLeft = tuesday.getTimeInMillis() - now.getTimeInMillis();
 
