@@ -38,19 +38,18 @@ class AlarmLabel extends JLabel implements ActionListener {
             this.type = type;
             setForeground(Color.black);
 
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.DAY_OF_WEEK_IN_MONTH, 2);
-            c.set(Calendar.HOUR_OF_DAY, 12);
-            c.set(Calendar.MINUTE, 0);
-            c.set(Calendar.SECOND, 0);
-            c.set(Calendar.MILLISECOND, 0);
+            GregorianCalendar c = new GregorianCalendar(2017, Calendar.NOVEMBER, 14);
+           // c.set(Calendar.DAY_OF_WEEK_IN_MONTH, 2);
+         //   c.set(Calendar.HOUR_OF_DAY, 12);
+         //   c.set(Calendar.MINUTE, 0);
+         //   c.set(Calendar.SECOND, 0);
+         //   c.set(Calendar.MILLISECOND, 0);
             long howMany = (c.getTimeInMillis()-System.currentTimeMillis());
             Date date = new Date(howMany);
             DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
             String normaldate = formated.format(date);
             switch (type) {
-                case "time" :
-
+                case "time" : sdf = new SimpleDateFormat(normaldate);
                     setFont(new Font("times-new-roman", Font.PLAIN, 60));
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
