@@ -98,7 +98,8 @@ class AlarmLabel extends JLabel implements ActionListener {
                 break;
         }
 
-        setText(sdf.format(d));
+        setText(sdf.format(normaldate));
+
         System.out.println("ХУЙ");
     }
 
