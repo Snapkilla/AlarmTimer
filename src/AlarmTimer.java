@@ -40,9 +40,9 @@ class AlarmLabel extends JLabel implements ActionListener {
 
             Calendar now = Calendar.getInstance();
             int currentDay = now.get(Calendar.DAY_OF_WEEK);
-
+System.out.println(currentDay);
             Calendar tuesday = Calendar.getInstance();
-            tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7 ));
+            tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7) );
             // int tuesdayDay = 7 - (currentDay%7);
 
             tuesday.set(Calendar.HOUR_OF_DAY, 12);
