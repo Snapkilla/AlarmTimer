@@ -35,18 +35,18 @@ class AlarmLabel extends JLabel implements ActionListener {
 
         String type;
         SimpleDateFormat sdf;
+        Calendar tuesday = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
         public AlarmLabel(String type){
             this.type = type;
             setForeground(Color.black);
             //Locale locale = new Locale("ru");
-            Calendar now = Calendar.getInstance();
+
             int currentDay = now.get(Calendar.DAY_OF_WEEK);
 
-
-            Calendar tuesday = Calendar.getInstance();
             //tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7) );
 
-            System.out.println(tuesday.get(Calendar.DAY_OF_WEEK));
+           // System.out.println(tuesday.get(Calendar.DAY_OF_WEEK));
 
             //int tuesdayDay = 7 - (currentDay%7);
            switch (now.get(Calendar.DAY_OF_WEEK)){
@@ -75,30 +75,31 @@ class AlarmLabel extends JLabel implements ActionListener {
             tuesday.set(Calendar.SECOND, 00);
             tuesday.set(Calendar.MILLISECOND, 00);
 
-            long millisLeft = tuesday.getTimeInMillis() - now.getTimeInMillis();
 
-              Date date = new Date(millisLeft);
-              DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
-            formated.setTimeZone(TimeZone.getTimeZone("UTC"));
-             String normaldate = formated.format(date);
-
-
-            switch (type) {
-                case "time" : sdf = new SimpleDateFormat(normaldate);
-                    setFont(new Font("times-new-roman", Font.PLAIN, 60));
-                    setHorizontalAlignment(SwingConstants.CENTER);
-                    break;
-                default     : sdf = new SimpleDateFormat();
-                    break;
-            }
 
             Timer t = new Timer(1000, this);
             t.start();
         }
 
     public void actionPerformed(ActionEvent ae) {
-        Date d = new Date();
+
+        long millisLeft = tuesday.getTimeInMillis() - now.getTimeInMillis();
+        Date date = new Date(millisLeft);
+        DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
+        formated.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String normaldate = formated.format(date);
+
+                switch (type) {
+            case "time" : sdf = new SimpleDateFormat(normaldate);
+                setFont(new Font("times-new-roman", Font.PLAIN, 60));
+                setHorizontalAlignment(SwingConstants.CENTER);
+                break;
+            default     : sdf = new SimpleDateFormat();
+                break;
+        }
+
         setText(sdf.format(d));
+        System.out.println("ХУЙ");
     }
 
 }
