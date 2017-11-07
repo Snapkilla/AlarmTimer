@@ -17,11 +17,11 @@ public class AlarmTimer {
 
     public static void main(String[] arguments) {
         AlarmLabel timeLabel = new AlarmLabel("time");
-        JFrame f = new JFrame("Raid alarm");
+        JFrame f = new JFrame("Raid refresh alarm");
         f.setSize(500, 350);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(new GridLayout(2, 1));
-        JLabel title = new JLabel("Маму ебал, рейд через");
+        JLabel title = new JLabel("Маму ебал, рейд обновится через");
         title.setFont(new Font("Arial", Font.BOLD, 40));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         timeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
