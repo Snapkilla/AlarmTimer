@@ -85,7 +85,7 @@ class AlarmLabel extends JLabel implements ActionListener {
 
             Timer t = new Timer(1000, this);
             t.start();
-            if (days == hours && hours == minutes && minutes == seconds){
+            if (days == hours && hours == minutes && minutes == seconds && seconds == 0){
                 Toolkit.getDefaultToolkit().beep();
                 t.stop();
             }
