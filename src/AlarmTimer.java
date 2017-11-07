@@ -32,27 +32,33 @@ public class AlarmTimer {
 }
 
 class AlarmLabel extends JLabel implements ActionListener {
+
         String type;
         SimpleDateFormat sdf;
         public AlarmLabel(String type){
             this.type = type;
             setForeground(Color.black);
-
+            //Locale locale = new Locale("ru");
             Calendar now = Calendar.getInstance();
             int currentDay = now.get(Calendar.DAY_OF_WEEK);
-System.out.println(currentDay);
-System.out.println(Calendar.HOUR_OF_DAY);
+
+
             Calendar tuesday = Calendar.getInstance();
             //tuesday.add(Calendar.DAY_OF_YEAR, 7 - (currentDay%7) );
-            // int tuesdayDay = 7 - (currentDay%7);
-            switch (Calendar.DAY_OF_WEEK){
+
+            System.out.println(tuesday.get(Calendar.DAY_OF_WEEK));
+
+            //int tuesdayDay = 7 - (currentDay%7);
+           switch (now.get(Calendar.DAY_OF_WEEK)){
                 case 1 : tuesday.add(Calendar.DAY_OF_YEAR, 2);
                     break;
                 case 2 : tuesday.add(Calendar.DAY_OF_YEAR, 1);
                     break;
-                case 3 : if (Calendar.HOUR_OF_DAY > 12){
+                case 3 : if (now.get(Calendar.HOUR_OF_DAY) > 12){
                     tuesday.add(Calendar.DAY_OF_YEAR, 7);
-                    } else break;
+                    } else {
+                    //tuesday.set(Calendar.DAY_OF_YEAR, now.get(Calendar.DAY_OF_YEAR));
+                    break;}
                     break;
                 case 4 : tuesday.add(Calendar.DAY_OF_YEAR, 6);
                     break;
@@ -73,7 +79,9 @@ System.out.println(Calendar.HOUR_OF_DAY);
 
               Date date = new Date(millisLeft);
               DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
+            formated.setTimeZone(TimeZone.getTimeZone("UTC"));
              String normaldate = formated.format(date);
+
 
             switch (type) {
                 case "time" : sdf = new SimpleDateFormat(normaldate);
