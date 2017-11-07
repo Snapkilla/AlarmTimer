@@ -1,8 +1,6 @@
 import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
 
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -39,9 +37,12 @@ public class AlarmTimer {
 class AlarmLabel extends JLabel implements ActionListener {
 
         String type;
-        SimpleDateFormat sdf;
         Calendar tuesday = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
+        long seconds;
+        long minutes;
+        long hours;
+        long days;
         public AlarmLabel(String type){
             this.type = type;
             setForeground(Color.black);
@@ -84,6 +85,11 @@ class AlarmLabel extends JLabel implements ActionListener {
 
             Timer t = new Timer(1000, this);
             t.start();
+            if (days == hours && hours == minutes && minutes == seconds){
+                Toolkit.getDefaultToolkit().beep();
+                t.stop();
+            }
+
         }
 
     public void actionPerformed(ActionEvent ae) {
@@ -93,10 +99,10 @@ class AlarmLabel extends JLabel implements ActionListener {
         //DateFormat formated = new SimpleDateFormat("DD:HH:mm:ss:SSS");
         //formated.setTimeZone(TimeZone.getTimeZone("UTC"));
         //String normaldate = formated.format(date);
-        long seconds =  (millisLeft / 1000) % 60 ;
-        long minutes =  ((millisLeft  / (1000*60)) % 60);
-        long hours   =  ((millisLeft  / (1000*60*60)) % 24);
-        long days   =  ((millisLeft / (1000*60*60*24)));
+        seconds =  (millisLeft / 1000) % 60 ;
+        minutes =  ((millisLeft  / (1000*60)) % 60);
+        hours   =  ((millisLeft  / (1000*60*60)) % 24);
+        days   =  ((millisLeft / (1000*60*60*24)));
         String normaldate = new String(String.valueOf(days) + " : " + String.valueOf(hours) + " : " + String.valueOf(minutes) + " : " + String.valueOf(seconds) );
 
         setText(normaldate);
